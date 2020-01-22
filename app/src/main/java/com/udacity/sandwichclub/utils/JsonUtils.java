@@ -13,8 +13,10 @@ public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
 
+        //Create new sandwitch object
         Sandwich sSandwitch = new Sandwich();
 
+        //Set vars
         String strMainName = "";
         String strDesc = "";
 
@@ -25,7 +27,7 @@ public class JsonUtils {
         List<String> lsAlsoKnownAs = new ArrayList<String>();
 
 
-
+        //Process JSON
         try {
 
 
@@ -58,6 +60,7 @@ public class JsonUtils {
             e.printStackTrace();
         }
 
+        //Store JSON values into new Sandwitch object
         sSandwitch.setMainName(strMainName);
         sSandwitch.setIngredients(lsIngredients);
         sSandwitch.setAlsoKnownAs(lsAlsoKnownAs);

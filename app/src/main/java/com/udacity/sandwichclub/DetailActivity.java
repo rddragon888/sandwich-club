@@ -18,6 +18,7 @@ import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
+    //Set vars
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
     ImageView ingredientsIv;
@@ -37,11 +38,11 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
-        TextView tvOrigin = findViewById(R.id.origin_tv);
-        TextView tvAlsoKnownAs = findViewById(R.id.also_known_tv);
-        TextView tvIngredients = findViewById(R.id.ingredients_tv);
-        TextView tvDesc = findViewById(R.id.description_tv);
+        ingredientsIv = findViewById(R.id.image_iv);
+        tvOrigin = findViewById(R.id.origin_tv);
+        tvAlsoKnownAs = findViewById(R.id.also_known_tv);
+        tvIngredients = findViewById(R.id.ingredients_tv);
+        tvDesc = findViewById(R.id.description_tv);
 
 
 
@@ -87,7 +88,7 @@ public class DetailActivity extends AppCompatActivity {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
-    //TODO Fix errors with populateUI()
+
     private void populateUI() {
 
         tvDesc.setText(strDesc);
