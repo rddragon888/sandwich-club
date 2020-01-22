@@ -13,15 +13,24 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
     ImageView ingredientsIv;
     TextView tvOrigin;
+    TextView tvAlsoKnownAs;
+    TextView tvIngredients;
     TextView tvDesc;
 
     String strDesc = "";
+    String strOrigin = "";
+    List<String> lstrAlsoKnownAs = new ArrayList<>();
+    List<String> lstrIngredients = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +39,10 @@ public class DetailActivity extends AppCompatActivity {
 
         ImageView ingredientsIv = findViewById(R.id.image_iv);
         TextView tvOrigin = findViewById(R.id.origin_tv);
+        TextView tvAlsoKnownAs = findViewById(R.id.also_known_tv);
+        TextView tvIngredients = findViewById(R.id.ingredients_tv);
         TextView tvDesc = findViewById(R.id.description_tv);
+
 
 
 
@@ -64,6 +76,10 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(sandwich.getMainName());
         strDesc = sandwich.getDescription();
+        strOrigin = sandwich.getPlaceOfOrigin();
+        lstrAlsoKnownAs = sandwich.getAlsoKnownAs();
+        lstrIngredients = sandwich.getIngredients();
+
         populateUI();
     }
 
@@ -71,10 +87,15 @@ public class DetailActivity extends AppCompatActivity {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
-
+    //TODO Fix errors with populateUI()
     private void populateUI() {
 
         tvDesc.setText(strDesc);
+        tvOrigin.setText(strOrigin);
+        tvAlsoKnownAs.setText(lstrAlsoKnownAs.toString());
+        tvIngredients.setText(lstrIngredients.toString());
+
+
 
     }
 }

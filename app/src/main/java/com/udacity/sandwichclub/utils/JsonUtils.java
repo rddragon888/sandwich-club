@@ -6,34 +6,66 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) {
-        
+
         Sandwich sSandwitch = new Sandwich();
 
-        String strMainName = "", strDesc = "", stringredients = "";
+        String strMainName = "";
+        String strDesc = "";
+
+        String strPlaceOfOrigin = "";
+        String strImage = "";
+
+        List<String> lsIngredients = new ArrayList<String>();
+        List<String> lsAlsoKnownAs = new ArrayList<String>();
 
 
-        //Having issues finding and getting data from JSON object.
-        try{
 
-            JSONObject jObj = new JSONObject(json);
-            JSONArray jArray = jObj.optJSONArray("name");
-            for(int i = 0; i < jArray.length(); i++)
-            {
-                    JSONObject jObjDetail = jArray.getJSONObject(i);
-                    strMainName = jObjDetail.getString("mainName");
-                    strDesc = jObjDetail.getString("description");
-                    stringredients = jObjDetail.getString("ingredients");
+        try {
+
+
+            JSONObject joMain = new JSONObject(json);
+            JSONObject joSanwich = joMain.getJSONObject("name");
+
+            strMainName = joSanwich.getString("mainName");
+            strDesc = joMain.getString("description");
+
+
+
+            JSONArray jaAlsoKnownAs = joSanwich.getJSONArray("alsoKnownAs");
+            for (int i = 0; i < jaAlsoKnownAs.length(); i++) {
+                String strAlsoKnownAs = jaAlsoKnownAs.getString(i);
+                lsAlsoKnownAs.add(strAlsoKnownAs);
             }
+
+            strPlaceOfOrigin = joMain.getString("placeOfOrigin");
+            strImage = joMain.getString("image");
+
+
+            JSONArray jaIngredients = joMain.getJSONArray("ingredients");
+            for (int i = 0; i < jaIngredients.length(); i++) {
+                String strIngredients = jaIngredients.getString(i);
+                lsIngredients.add(strIngredients);
+            }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        
+
         sSandwitch.setMainName(strMainName);
+        sSandwitch.setIngredients(lsIngredients);
+        sSandwitch.setAlsoKnownAs(lsAlsoKnownAs);
         sSandwitch.setDescription(strDesc);
+        sSandwitch.setImage(strImage);
+        sSandwitch.setPlaceOfOrigin(strPlaceOfOrigin);
+
+
 
         return sSandwitch;
     }
